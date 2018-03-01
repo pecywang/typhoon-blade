@@ -3,6 +3,11 @@
 blade_dir=$(cd $(dirname $0) && pwd)
 cd $blade_dir
 
+# format: escape \r\n for git AutoCRLF
+find $blade_dir/vim -type f -name *.vim -exec dos2unix -q {} \;
+dos2unix -q $blade_dir/{genlibbuild,lsnobuild,lsrc,merge-static-libs,bladefunctions,blade}
+chmod +x $blade_dir/blade
+
 echo -n "Installing vim scripts..."
 mkdir -p ~/.vim/{syntax,ftdetect,indent}
 ln -sf $blade_dir/vim/ftdetect/* ~/.vim/ftdetect/
